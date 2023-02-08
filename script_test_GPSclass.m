@@ -1,4 +1,4 @@
-% script_test_GPSclass.m.m
+% script_test_GPSclass.m
 % This is a script to exercise the class: GPS.m
 % This function was written on 2021_12_12 by S. Brennan, sbrennan@psu.edu
 

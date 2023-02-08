@@ -75,7 +75,7 @@ This "GPSclass" code assists in doing the coordinate systems for GPS data, inclu
 
 * Inputs: 
     * a "path" type that is N x 3 and is a number.
-    
+
 * Outputs
     * a path(s) as Nx3 vector in the desired coordinate system
    
@@ -87,7 +87,7 @@ To get a local copy up and running follow these simple steps.
 
 ### Installation
 
-1.  Make sure to run MATLAB 2020b or higher. Why? The "digitspattern" command used in the DebugTools utilities was released late 2020 and this is used heavily in the Debug routines. If debugging is shut off, then earlier MATLAB versions will likely work, and this has been tested back to 2018 releases.
+1.  It's recommended to run MATLAB 2020b or higher. 
 
 2. Clone the repo
    ```sh

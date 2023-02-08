@@ -10,7 +10,7 @@
 close all;
 
 %% Load test track LLA data
-data = 1.0e+02 *[       
+LLA_data = 1.0e+02 *[       
    0.408639848000000  -0.778373327000000   3.338170000000000
    0.408637407000000  -0.778373880000000   3.338170000000000
    0.408635103000000  -0.778373987000000   3.338170000000000
@@ -43,7 +43,8 @@ data = 1.0e+02 *[
 figure(11111);
 clf;
 
-geoplot(data(:,1), data(:,2), '.-','Linewidth',3,'Markersize',40)
+% Plot the results onto a map, preferrably satellite view but OSM if not
+geoplot(LLA_data(:,1), LLA_data(:,2), '.-','Linewidth',3,'Markersize',40)
 try
     geobasemap satellite
 catch
@@ -52,8 +53,10 @@ end
 hold on;
 
 %% BASIC example 1 - converting LLA to ENU
-gps_object = GPS();
-ENU_data = gps_object.WGSLLA2ENU(data(:,1), data(:,2), data(:,3));
+gps_object = GPS(); % Initiate the class object for GPS
+
+% Use the class to convert LLA to ENU
+ENU_data = gps_object.WGSLLA2ENU(LLA_data(:,1), LLA_data(:,2), LLA_data(:,3));
 ENU_data = ENU_data';
 
 %% Plot the result

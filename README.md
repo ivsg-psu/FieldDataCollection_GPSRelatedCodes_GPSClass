@@ -12,13 +12,13 @@ Search for this, and you will find!
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a> -->
 
-  <h2 align="center"> FeatureExtraction_DataClean_BreakDataIntoLaps
+  <h2 align="center"> FieldDataCollection_GPSRelatedCodes_GPSClass
   </h2>
 
 <img src=".\Images\RaceTrack.jpg" alt="main laps picture" width="960" height="540">
 
   <p align="center">
-    The purpose of this code is to break data into "laps", e.g. segments of data that are defined by a clear start condition and end condition. The code finds when a given path meets the "start" condition, then meets the "end" condition, and returns every portion of the path that is inside both conditions. Advanced features of the code include the ability to return the row indices defining each lap's data, as well as the path portions prior and after the lap area in case the "run in" or "run out" areas are needed.
+    The purpose of this code is to do conversions among coordinate systems for GPS data, including East-North-Up (ENU), Latitude-Longitude-Altitude (LLA) and Earth-Centered-Earth-Fixed (ECEF) systems.  
     <br />
     <a href="https://github.com/ivsg-psu/FeatureExtraction_Association_PointToPointAssociation"><strong>Explore the docs »</strong></a>
     <br />
@@ -92,10 +92,10 @@ To get a local copy up and running follow these simple steps.
 
 2. Clone the repo
    ```sh
-   git clone https://github.com/ivsg-psu/FeatureExtraction_DataClean_BreakDataIntoLaps
+   git clone https://https://github.com/ivsg-psu/FieldDataCollection_GPSRelatedCodes_GPSClass
    ```
-3. Run the main code in the root of the folder (script_demo_Laps.m), this will download the required utilities for this code, unzip the zip files into a Utilities folder (.\Utilities), and update the MATLAB path to include the Utility locations. This install process will only occur the first time. Note: to force the install to occur again, delete the Utilities directory and clear all global variables in MATLAB (type: "clear global *").
-4. Confirm it works! Run script_demo_Laps. If the code works, the script should run without errors. This script produces numerous example images such as those in this README file.
+3. Run the main code in the root of the folder (script_test_GPSclass.m).
+4. Confirm it works! Run script_demo_Laps. If the code works, the script should run without errors. This script produces paths formed by GPS coordinates on the Penn State Test Track.
 
 
 <!-- STRUCTURE OF THE REPO -->
@@ -109,39 +109,17 @@ The following are the top level directories within the repository:
 
 ### Dependencies
 
-* [Errata_Tutorials_DebugTools](https://github.com/ivsg-psu/Errata_Tutorials_DebugTools) - The DebugTools repo is used for the initial automated folder setup, and for input checking and general debugging calls within subfunctions. The repo can be found at: https://github.com/ivsg-psu/Errata_Tutorials_DebugTools
-
-* [PathPlanning_PathTools_PathClassLibrary](https://github.com/ivsg-psu/PathPlanning_PathTools_PathClassLibrary) - the PathClassLibrary contains tools used to find intersections of the data with particular line segments, which is used to find start/end/excursion locations in the functions. The repo can be found at: https://github.com/ivsg-psu/PathPlanning_PathTools_PathClassLibrary
-
-    Each should be installed in a folder called "Utilities" under the root folder, namely ./Utilities/DebugTools/ , ./Utilities/PathClassLibrary/ . If you wish to put these codes in different directories, the main call stack in script_demo_Laps can be easily modified with strings specifying the different location, but the user will have to make these edits directly. 
-    
-    For ease of getting started, the zip files of the directories used - without the .git repo information, to keep them small - are included in this repo.
+No dependencies needed for this class. 
 
 <!-- FUNCTION DEFINITIONS -->
 ### Functions
 **Basic Support Functions**
 <ul>
 	<li>
-    fcn_Laps_plotLapsXY.m : This function plots the laps. For example, the function was used to make the plot below of the last Sample laps.
+    fcn_GPS_checkInputsToFunctions.m : Checks the variable types commonly used in the GPS class to ensure that they are correctly formed.
     <br>
-    <img src=".\Images\fcn_Laps_plotLapsXY.png" alt="fcn_Laps_plotLapsXY picture" width="400" height="300">
-    </li>
-	<li>
-    fcn_Laps_fillSampleLaps.m : This function allows users to create dummy data to test lap functions. The test laps are in general difficult situations, including scenarios where laps loop back onto themself and/or with separate looping structures. These challenges show that the library can work on varying and complicated data sets. NOTE: within this function, commented out typically, there is code to allow users to draw their own lap test cases.
-    <br>
-    <img src=".\Images\fcn_Laps_fillSampleLaps.png" alt="fcn_Laps_fillSampleLaps picture" width="400" height="300">
-    </li>
-    <li>
-    fcn_Laps_plotZoneDefinition.m : Plots any type of zone, allowing user-defined colors. For example, the figure below shows a radial zone for the start, and a line segment for the end. For the line segment, an arrow is given that indicates which direction the segment must be crossed in order for the condition to be counted. 
-    <br>
-    <img src=".\Images\fcn_Laps_plotZoneDefinition.png" alt="fcn_Laps_plotZoneDefinition picture" width="400" height="300">
-    </li>
-    <li>
-    fcn_Laps_plotPointZoneDefinition.m : Plots a point zone, allowing user-defined colors. This function is mostly used to support fcn_Laps_plotZoneDefinition.m 
-    </li>
-    <li>
-    fcn_Laps_plotSegmentZoneDefinition.m : Plots a segment zone, allowing user-defined colors. This function is mostly used to support fcn_Laps_plotZoneDefinition.m 
-    </li>
+  </li>
+
     
     
 
@@ -150,18 +128,20 @@ The following are the top level directories within the repository:
 **Core Functions**
 <ul>
 	<li>
-    fcn_Laps_breakDataIntoLaps.m : This is the core function for this repo that breaks data into laps. Note: the example shown below uses radial zone definitions, and the results illustrate how a lap, when it is within a start zone, starts at the FIRST point within a start zone. Similarly, each lap ends at the LAST point before exiting the end zone definition. The input data is a traversal type for this particular function.
+    fcn_GPS_enu2llaPath.m : transforms a path(s) in ENU coordinate system to Geodetic coordinate system.
     <br>
     <img src=".\Images\fcn_Laps_breakDataIntoLaps.png" alt="fcn_Laps_breakDataIntoLaps picture" width="400" height="300">
-    </li>	
+  </li>	
 	<li>
-    fcn_Laps_checkZoneType.m : This function supports fcn_Laps_breakDataIntoLaps by checking if the zone definition inputs are either a point or line segment zone specification.
-    </li>
-	<li>
-    fcn_Laps_breakDataIntoLapIndices.m : This is a more advanced version of fcn_Laps_breakDataIntoLaps, where the outputs are the indices that apply to each lap. The input type is also easier to use, a "path" type which is just an array of [X Y]. The example here shows the use of a segment type zone for the start zone, a point-radius type zone for the end zone. The results of this function are the row indices of the data. The plot below illustrates that the function returns 3 laps in this example, and as well returns the pre-lap and post-lap data. One can observe that it is common that the prelap data for one lap (Lap 2) consists of the post-lap data for the prior lap (Lap 1). 
+    fcn_GPS_enu2xyz.m : transforms a path(s) in ENU coordinate system to ECEF coordinate system. 
     <br>
     <img src=".\Images\fcn_Laps_breakDataIntoLapIndices.png" alt="fcn_Laps_breakDataIntoLapIndices picture" width="600" height="300">
-    </li>	
+  </li>	
+	<li>
+    fcn_GPS_lla2enu.m: transforms a path(s) in Geodetic coordinate system to ENU coordinate system.
+    <br>
+    <img src=".\Images\fcn_Laps_breakDataIntoLapIndices.png" alt="fcn_Laps_breakDataIntoLapIndices picture" width="600" height="300">
+  </li>	
 	<li>
     fcn_Laps_findSegmentZoneStartStop.m : A supporting function that finds the portions of a path that meet a segment zone criteria, returning the starting/ending indices for every crossing of a segment zone. The crossing must cross in the correct direction, and a segment is considered crossed if either the start or end of segment lie on the segment line. This is illustrated in the challenging example shown below, where the input path (thin blue) starts at the top, and then zig-zags repeatedly over a segment definition (green). For each time the blue line crosses the line segment, that portion of the path is saved as a separate possible crossing and thus, for this example, there are 5 possible crossings.
     <br>

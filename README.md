@@ -56,7 +56,6 @@ Search for this, and you will find!
     <li><a href="#usage">Usage</a></li>
 	    <ul>
 	    <li><a href="#examples">Examples</li>
-	    <li><a href="#definition-of-endpoints">Definition of Endpoints</li>
 	    </ul>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -135,27 +134,27 @@ No dependencies needed for this class.
 	<li>
     fcn_GPS_enu2xyz.m : transforms a path(s) in ENU coordinate system to ECEF coordinate system. 
     <br>
-    <img src=".\Images\fcn_Laps_breakDataIntoLapIndices.png" alt="fcn_Laps_breakDataIntoLapIndices picture" width="600" height="300">
+    <img src=".\Images\enu2xyz.png" width="400" height="300">
   </li>	
 	<li>
     fcn_GPS_lla2enu.m: transforms a path(s) in Geodetic coordinate system to ENU coordinate system.
     <br>
-    <img src=".\Images\fcn_Laps_breakDataIntoLapIndices.png" alt="fcn_Laps_breakDataIntoLapIndices picture" width="600" height="300">
+    <img src=".\Images\lla2enu.png" width="400" height="300">
   </li>	
 	<li>
     fcn_GPS_lla2xyz.m : transforms a path(s) in Geodetic coordinate system to ECEF coordinate system. 
     <br>
-    <img src=".\Images\fcn_Laps_findSegmentZoneStartStop.png" alt="fcn_Laps_findSegmentZoneStartStop picture" width="400" height="300">
+    <img src=".\Images\lla2xyz.png" width="400" height="300">
     </li>	
 	<li>
     fcn_GPS_xyz2enu.m : transforms a path(s) in ECEF coordinate system to ENU coordinate system. 
     <br>
-    <img src=".\Images\fcn_Laps_findPointZoneStartStopAndMinimum.png" alt="fcn_Laps_findPointZoneStartStopAndMinimum picture" width="400" height="300">
+    <img src=".\Images\xyz2enu.png"  width="400" height="300">
   </li>	
 	<li>
     fcn_GPS_xyz2lla.m : transforms a path(s) in ECEF coordinate system to Geodetic coordinate system. 
     <br>
-    <img src=".\Images\fcn_Laps_findPointZoneStartStopAndMinimum.png" alt="fcn_Laps_findPointZoneStartStopAndMinimum picture" width="400" height="300">
+    <img src=".\Images\xyz2lla.png"  width="400" height="300">
   </li>	
 </ul>
 Each of the functions has an associated test script, using the convention

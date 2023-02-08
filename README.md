@@ -15,7 +15,7 @@ Search for this, and you will find!
   <h2 align="center"> FieldDataCollection_GPSRelatedCodes_GPSClass
   </h2>
 
-<img src=".\Images\RaceTrack.jpg" alt="main laps picture" width="960" height="540">
+<img src=".\Images\test_GPSclass.png" >
 
   <p align="center">
     The purpose of this code is to do conversions among coordinate systems for GPS data, including East-North-Up (ENU), Latitude-Longitude-Altitude (LLA) and Earth-Centered-Earth-Fixed (ECEF) systems.  
@@ -104,7 +104,7 @@ The following are the top level directories within the repository:
 <ul>
 	<li>/Documents folder: Descriptions of the functionality and usage of the various MATLAB functions and scripts in the repository.</li>
 	<li>/Functions folder: The majority of the code for the point and patch association functionalities are implemented in this directory. All functions as well as test scripts are provided.</li>
-	<li>/Utilities folder: Dependencies that are utilized but not implemented in this repository are placed in the Utilities directory. These can be single files but are most often folders containing other cloned repositories.</li>
+	<!-- <li>/Utilities folder: Dependencies that are utilized but not implemented in this repository are placed in the Utilities directory. These can be single files but are most often folders containing other cloned repositories.</li> -->
 </ul>
 
 ### Dependencies
@@ -128,9 +128,9 @@ No dependencies needed for this class.
 **Core Functions**
 <ul>
 	<li>
-    fcn_GPS_enu2llaPath.m : transforms a path(s) in ENU coordinate system to Geodetic coordinate system.
+    fcn_GPS_enu2lla.m : transforms a path(s) in ENU coordinate system to Geodetic coordinate system.
     <br>
-    <img src=".\Images\fcn_Laps_breakDataIntoLaps.png" alt="fcn_Laps_breakDataIntoLaps picture" width="400" height="300">
+    <img src=".\Images\enu2lla_1.png" width="400" height="300">
   </li>	
 	<li>
     fcn_GPS_enu2xyz.m : transforms a path(s) in ENU coordinate system to ECEF coordinate system. 

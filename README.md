@@ -69,16 +69,16 @@ Search for this, and you will find!
 
 <!--[![Product Name Screen Shot][product-screenshot]](https://example.com)-->
 
-The most common location of our testing is the Larson Test Track, and we regularly use “laps around the track” as replicates, hence the name of the library. And when not on the test track and on public roads, data often needs to be segmented from one keypoint to another. For example, it is a common task to seek a subset of path data that resides only from one intersection to the next. While one could segment this data during data collection by simply stopping the vehicle recordings at each segment, it is impractical and dangerous to stop data collection at each and every possible intersection or feature point. Rather, vehicle or robot data is often collected by repeated driving of an area over/over without stopping. So, the final data set may contain many replicates of the area of interest. 
+The most common location of our mapping test is the Larson Test Track, and GPS data is heavily used during mapping work. It is common people need to do coordinate systems conversion from one to another, due to requirements from various aspects. 
 
-This "Laps" code assists in breaking recorded path data into paths by defining specific start and end locations, for example from intersection "A" to stop sign "B". Specifically, the purpose of this code is to break data into "laps", e.g. segments of data that are defined by a clear start condition and end condition. The code finds when a given path meets the "start" condition, then meets the "end" condition, and returns every portion of the path that is inside both conditions. There are many advanced features as well including the ability to define excursion points, the number of points that must be within a condition for it to activate, and the ability to extract the portions of the paths before and after each lap, in addition to the data for each lap.
+This "GPSclass" code assists in doing the coordinate systems for GPS data, including East-North-Up (ENU), Latitude-Longitude-Altitude (LLA) and Earth-Centered-Earth-Fixed (ECEF) systems.
 
 * Inputs: 
-    * either a "traversals" type, as explained in the Path library, or a path of XY points in N x 2 format
-    * the start, end, and optional excursions can be entered as either a line segment or a point and radius.  
+    * a "path" type that is N x 3 and is a number.
+    
 * Outputs
-    * Separate arrays of XY points, or of indices for the lap, with one array for each lap
-    * The function also can return the points that were not used for laps, e.g. the points before the first start and after the last end
+    * a path(s) as Nx3 vector in the desired coordinate system
+   
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -94,7 +94,7 @@ To get a local copy up and running follow these simple steps.
    git clone https://https://github.com/ivsg-psu/FieldDataCollection_GPSRelatedCodes_GPSClass
    ```
 3. Run the main code in the root of the folder (script_test_GPSclass.m).
-4. Confirm it works! Run script_demo_Laps. If the code works, the script should run without errors. This script produces paths formed by GPS coordinates on the Penn State Test Track.
+4. Confirm it works! If the code works, the script should run without errors. This script produces paths formed by GPS coordinates on the Penn State Test Track.
 
 
 <!-- STRUCTURE OF THE REPO -->

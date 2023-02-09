@@ -18,7 +18,7 @@ Search for this, and you will find!
 <img src=".\Images\test_GPSclass.png" >
 
   <p align="center">
-    The purpose of this code is to do conversions among coordinate systems for GPS data, including East-North-Up (ENU), Latitude-Longitude-Altitude (LLA) and Earth-Centered-Earth-Fixed (ECEF) systems.  
+    The purpose of this code is to support conversions among coordinate systems commonly used for GPS data. These include: East-North-Up (ENU), Latitude-Longitude-Altitude (LLA), and Earth-Centered-Earth-Fixed (ECEF) systems.  Note that UTM coordinates are not yet supported.
     <br />
     <a href="https://github.com/ivsg-psu/FeatureExtraction_Association_PointToPointAssociation"><strong>Explore the docs »</strong></a>
     <br />
@@ -69,15 +69,21 @@ Search for this, and you will find!
 
 <!--[![Product Name Screen Shot][product-screenshot]](https://example.com)-->
 
-The most common location of our mapping test is the Larson Test Track, and GPS data is heavily used during mapping work. It is common people need to do coordinate systems conversion from one to another, due to requirements from various aspects. 
+For nearly every project within the Intelligent Vehicles and Systems Group (IVSG), GPS data is a key means of obtaining measurements. Such data is usually reported in Latitude Longitude Altitude (LLA) coordiantes to position the measurement relative to the Earth's sphere. However, the use of LLA data is difficult: the numbers produced by GPS are not intuitive to human understanding, the required precision in measurement - often 6 decimals or more - makes data entry difficult to process on single-precision variables, the number lengths make data prone to error and difficult to spot errors, and the coordinate sytem itself is not isometric ("length preserving"). For example, a degree of latitude - due to the original definition of the meter as 1/10,000,000th the distance from the equator to the north pole - always corresponds to (10^7/90) or approximately 111,111 meters. However, a degree of longitude is this distance ONLY around the equator. At the north pole, a degree of longitude corresonds to zero meters. Thus, longitude degrees change in "length" by a factor of 100,000! 
 
-This "GPSclass" code assists in doing the coordinate systems for GPS data, including East-North-Up (ENU), Latitude-Longitude-Altitude (LLA) and Earth-Centered-Earth-Fixed (ECEF) systems.
+As well, different tool sets use different coordinate systems. For example:
 
-* Inputs: 
-    * a "path" type that is N x 3 and is a number.
+* Traffic simulation tools (SUMO for example) tend to use UTM coordinates
 
-* Outputs
-    * a path(s) as Nx3 vector in the desired coordinate system
+* 3D modeling simulation tools (CARLA, for example) tend to use ENU coordinates
+
+* Mapping systems tend to use LLA coordinates
+
+Thus, there is a need for better data representations and coordinate systems. But each coordinate system encounters challenges, particularly because the representation of roadways typically assumes a "flat" surface. Thus, as the scale of a local area becomes large enough, the errors between a flat approximation versus a spherical approximation begin to grow and can become so pronounced that data begin to disagree depending on the origin used for the flat representation. When operating vehicles over a "large" area, for example tens to hundreds of kilometers, these errors can be so large that one cannot tell, on the "edge" of a mapped region, which lane or which road a vehicle is operating in - even though the so-called precision of the GPS measurement is reporting centimeter-level accuracy.
+
+This "GPSclass" code assists in performing large the coordinate systems for GPS data, including East-North-Up (ENU), Latitude-Longitude-Altitude (LLA) and Earth-Centered-Earth-Fixed (ECEF) systems. 
+
+NOTE: a companion repository, https://github.com/ivsg-psu/TrafficSimulators_WideAreaCoordinateSystems , reviews the above issues, showing calculations for different transformation sequences, and reveals that particular transformation sequences generate less error than others. 
    
 
 <!-- GETTING STARTED -->

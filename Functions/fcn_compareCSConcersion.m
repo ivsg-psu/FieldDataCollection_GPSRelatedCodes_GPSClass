@@ -79,6 +79,7 @@ pathResult.Ag3 = resultAg3;
 pathResult.diffAg13 = resultAg1 - resultAg3;
 pathResult.diffAg23 = resultAg2 - resultAg3; 
 pathResult.diffAg12 = resultAg1 - resultAg2;
+
 figure();
 histogram(pathResult.diffAg13);
 ylabel('Frequency');

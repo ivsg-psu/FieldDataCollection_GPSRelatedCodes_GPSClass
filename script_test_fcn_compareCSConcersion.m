@@ -22,3 +22,5 @@ convertMode = 'enu2xyz';
 pathInput = readmatrix('sample_path_ENU_data.csv');
 gpsObj = GPS();
 pathResult = fcn_compareCSConcersion(convertMode,pathInput,referenceLLA,gpsObj);
+
+%% Test case 4: ENU to LLA

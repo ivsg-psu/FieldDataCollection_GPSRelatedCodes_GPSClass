@@ -235,12 +235,15 @@ classdef GPS < handle
                 
             end
             
-            LLA = zeros(3,size(ENU,2));
-            for i = 1:size(ENU,2)               
+%             LLA = zeros(3,size(ENU,2));
+            LLA = zeros(size(ENU));
+            %for i = 1:size(ENU,2)   
+            for i = 1:size(ENU,1)  
                 
                 %XYZ = ENU2WGSXYZ(obj, ENU(:,i), reference_latitude, reference_longitude, reference_altitude);
                 XYZ = ENU2WGSXYZ(obj, ENU(i,:), reference_latitude, reference_longitude, reference_altitude);
-                LLA(:,i) = WGSXYZ2LLA(obj, XYZ);
+                %LLA(:,i) = WGSXYZ2LLA(obj, XYZ);
+                LLA(i,:) = WGSXYZ2LLA(obj, XYZ);
                 
             end
             

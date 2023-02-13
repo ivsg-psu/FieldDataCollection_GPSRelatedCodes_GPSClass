@@ -24,3 +24,21 @@ gpsObj = GPS();
 pathResult = fcn_compareCSConcersion(convertMode,pathInput,referenceLLA,gpsObj);
 
 %% Test case 4: ENU to LLA
+convertMode = 'enu2lla';
+pathInput = readmatrix('sample_path_ENU_data.csv');
+gpsObj = GPS();
+pathResult = fcn_compareCSConcersion(convertMode,pathInput,referenceLLA,gpsObj);
+
+%% Test case 5: XYZ to ENU
+convertMode = 'xyz2enu';
+pathInput = readmatrix('sample_path_XYZ_data.csv');
+gpsObj = GPS();
+pathResult = fcn_compareCSConcersion(convertMode,pathInput,referenceLLA,gpsObj);
+
+%% Test case 6: XYZ to LLA
+convertMode = 'xyz2lla';
+pathInput = readmatrix('sample_path_XYZ_data.csv');
+gpsObj = GPS();
+pathResult = fcn_compareCSConcersion(convertMode,pathInput,referenceLLA,gpsObj);
+
+

@@ -46,15 +46,15 @@ clear temp;
 if strcmp(convertMode,'lla2enu')
 resultAg1 = gpsObj.WGSLLA2ENU(pathInput(:,1),pathInput(:,2),pathInput(:,3),referenceLLA(1),referenceLLA(2),referenceLLA(3))';
 resultAg2 = fcn_GPS_lla2enu(pathInput,referenceLLA);
-resultAg3 = lla2enu(pathInput,referenceLLA,'flat');
+resultAg3 = lla2enu(pathInput,referenceLLA,'ellipsoid');
 end
 
 %% ENU TO LLA
-% if strcmp(convertMode,'enu2lla')
-% resultAg1 = gpsObj.ENU2WGSLLA(pathInput,referenceLLA(1),referenceLLA(2),referenceLLA(3))';
-% resultAg2 = fcn_GPS_enu2lla(pathInput,referenceLLA);
-% resultAg3 = enu2lla(pathInput,referenceLLA,'flat');
-% end
+if strcmp(convertMode,'enu2lla')
+resultAg1 = gpsObj.ENU2WGSLLA(pathInput,referenceLLA(1),referenceLLA(2),referenceLLA(3));
+resultAg2 = fcn_GPS_enu2lla(pathInput,referenceLLA);
+resultAg3 = enu2lla(pathInput,referenceLLA,'ellipsoid');
+end
 
 %% ENU TO XYZ
 if strcmp(convertMode,'enu2xyz')
@@ -65,8 +65,32 @@ resultAg3 = zeros(size(pathInput));
 for ii = 1:height(pathInput)
 temp = pathInput(ii,:);
 [resultAg3(ii,1),resultAg3(ii,2),resultAg3(ii,3)] = enu2ecef(temp(1),temp(2),temp(3),referenceLLA(1),referenceLLA(2),referenceLLA(3),wgs84);
+clear temp;
+end
 end
 
+%% XYZ to ENU
+if strcmp(convertMode,'xyz2enu')
+resultAg1 = gpsObj.WGSXYZ2ENU(pathInput,referenceLLA(1),referenceLLA(2),referenceLLA(3))';
+resultAg2 = fcn_GPS_xyz2enu(pathInput,referenceLLA);
+wgs84 = wgs84Ellipsoid;
+for ii = 1:height(pathInput)
+temp = pathInput(ii,:);
+[resultAg3(ii,1),resultAg3(ii,2),resultAg3(ii,3)] = ecef2enu(temp(1),temp(2),temp(3),referenceLLA(1),referenceLLA(2),referenceLLA(3),wgs84);
+clear temp;
+end
+end
+
+%% XYZ to LLA
+if strcmp(convertMode,'xyz2lla')
+resultAg1 = zeros(size(pathInput));
+for ii = 1:height(pathInput)
+temp = pathInput(ii,:);
+resultAg1(ii,:) = gpsObj.WGSXYZ2LLA(temp)';
+end
+clear temp;
+resultAg2 = fcn_GPS_xyz2lla(pathInput);
+resultAg3 = ecef2lla(pathInput);
 end
 
 

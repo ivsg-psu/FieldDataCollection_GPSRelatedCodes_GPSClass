@@ -86,8 +86,8 @@ classdef GPS < handle
            
             % First, calculate the xyz of reflat, reflon, refalt
 
-            refXYZ = WGSLLA2XYZ(obj, reference_latitude, reference_longitude, reference_altitude);
-
+            %refXYZ = WGSLLA2XYZ(obj, reference_latitude, reference_longitude, reference_altitude);
+            refXYZ = WGSLLA2XYZ(obj, reference_latitude, reference_longitude, reference_altitude)';
             % Difference xyz from reference point
 
             diffXYZ = XYZ - refXYZ;
@@ -114,8 +114,8 @@ classdef GPS < handle
             
             R = R2 * R1;
 
-            ENU = R * diffXYZ;
-            
+            %ENU = R * diffXYZ;
+            ENU = R * diffXYZ';
         end
         
         function XYZ = ENU2WGSXYZ(obj, ENU, reference_latitude, reference_longitude, reference_altitude)

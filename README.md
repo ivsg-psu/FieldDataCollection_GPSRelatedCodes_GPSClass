@@ -57,6 +57,15 @@ Search for this, and you will find!
 	    <ul>
 	    <li><a href="#examples">Examples</li>
 	    </ul>
+    <li><a href="#comparing-coordinate-system-conversion-algorithms">Comparing coordinate system conversion algorithms</a></li>
+	    <ul>
+	    <li><a href="#lla-to-ecef">LLA to ECEF</li>
+      <li><a href="#lla-to-enu">LLA to ENU</li>
+      <li><a href="#enu-to-ecef">ENU to ECEF</li>
+      <li><a href="#enu-to-lla">ENU to LLA</li>
+      <li><a href="#ecef-to-enu">ECEF to ENU</li>
+      <li><a href="#ecef-to-lla">ECEF to LLA</li>
+	    </ul>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
@@ -177,7 +186,9 @@ help fcn_fcnname
 for any function to view function details.
 
 ## Comparing coordinate system conversion algorithms
-This section lists comparison of comparing the coordinate conversion algorithms for LLA, ENU and ECEF, from the GPS class written by Bobby, Satya's code, and MATLAB built-in code.
+This section lists comparison of the coordinate conversion algorithms for LLA, ENU and ECEF, from the GPS class, standalone code, and MATLAB built-in code.
+
+The script script_test_fcn_compareCSConcersion.m is used to generate all the plots in this section. 
 
 ### LLA to ECEF
 

@@ -44,16 +44,9 @@ clear temp;
 
 %% LLA TO ENU
 if strcmp(convertMode,'lla2enu')
-resultAg1 = gpsObj.WGSLLA2ENU(pathInput(:,1),pathInput(:,2),pathInput(:,3),referenceLLA(1),referenceLLA(2),referenceLLA(3))';
+resultAg1 = gpsObj.WGSLLA2ENU(pathInput(:,1),pathInput(:,2),pathInput(:,3),referenceLLA(1),referenceLLA(2),referenceLLA(3));
 resultAg2 = fcn_GPS_lla2enu(pathInput,referenceLLA);
 resultAg3 = lla2enu(pathInput,referenceLLA,'ellipsoid');
-end
-
-%% ENU TO LLA
-if strcmp(convertMode,'enu2lla')
-resultAg1 = gpsObj.ENU2WGSLLA(pathInput,referenceLLA(1),referenceLLA(2),referenceLLA(3));
-resultAg2 = fcn_GPS_enu2lla(pathInput,referenceLLA);
-resultAg3 = enu2lla(pathInput,referenceLLA,'ellipsoid');
 end
 
 %% ENU TO XYZ
@@ -68,6 +61,15 @@ temp = pathInput(ii,:);
 clear temp;
 end
 end
+
+%% ENU TO LLA
+if strcmp(convertMode,'enu2lla')
+resultAg1 = gpsObj.ENU2WGSLLA(pathInput,referenceLLA(1),referenceLLA(2),referenceLLA(3));
+resultAg2 = fcn_GPS_enu2lla(pathInput,referenceLLA);
+resultAg3 = enu2lla(pathInput,referenceLLA,'ellipsoid');
+end
+
+
 
 %% XYZ to ENU
 if strcmp(convertMode,'xyz2enu')
@@ -94,9 +96,8 @@ resultAg3 = ecef2lla(pathInput);
 end
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Put everything into an output struct
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Put everything into an output struct
+
 pathResult.Ag1 = resultAg1;
 pathResult.Ag2 = resultAg2;
 pathResult.Ag3 = resultAg3;
@@ -104,18 +105,27 @@ pathResult.diffAg13 = resultAg1 - resultAg3;
 pathResult.diffAg23 = resultAg2 - resultAg3; 
 pathResult.diffAg12 = resultAg1 - resultAg2;
 
+%% Generate figures
+
 figure();
+
 histogram(pathResult.diffAg13);
 ylabel('Frequency');
 xlabel('Difference between GPS class and MATLAB built-in');
+fcn_setFigureFormat;
+print(gcf,strcat(convertMode,'-Difference between GPS class and MATLAB built-in'),'-dpng');
+
 figure();
 histogram(pathResult.diffAg23);
 ylabel('Frequency');
-xlabel('Difference between Satya conversion and MATLAB built-in');
+xlabel('Difference between Satya and MATLAB built-in');
+fcn_setFigureFormat;
+print(gcf,strcat(convertMode,'-Difference between Satya and MATLAB built-in'),'-dpng');
+
 figure();
 histogram(pathResult.diffAg12);
 ylabel('Frequency');
-xlabel('Difference between GPS class and Satya conversion');
-
-
+xlabel('Difference between GPS class and Satya');
+fcn_setFigureFormat;
+print(gcf,strcat(convertMode,'-Difference between GPS class and Satya'),'-dpng');
 end

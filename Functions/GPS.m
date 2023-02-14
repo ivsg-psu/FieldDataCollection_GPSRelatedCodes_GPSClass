@@ -42,13 +42,14 @@ classdef GPS < handle
                 
             end
             
-            ENU = zeros(3,length(latitude));
+            %ENU = zeros(3,length(latitude));
+            ENU = zeros(length(latitude),3);
             for i = 1:length(latitude)
             
-                XYZ = WGSLLA2XYZ(obj, latitude(i), longitude(i), altitude(i));
+                XYZ = WGSLLA2XYZ(obj, latitude(i), longitude(i), altitude(i))';
 
-                ENU(:,i) = WGSXYZ2ENU(obj, XYZ, reference_latitude, reference_longitude, reference_altitude);
-                
+                %ENU(:,i) = WGSXYZ2ENU(obj, XYZ, reference_latitude, reference_longitude, reference_altitude);
+                ENU(i,:) = WGSXYZ2ENU(obj, XYZ, reference_latitude, reference_longitude, reference_altitude);
             end
             
         end

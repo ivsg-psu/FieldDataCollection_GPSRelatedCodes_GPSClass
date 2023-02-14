@@ -25,9 +25,9 @@ Search for this, and you will find!
     <br />
     <a href="https://github.com/ivsg-psu/FeatureExtraction_Association_PointToPointAssociation/tree/main/Documents">View Demo</a>
     ·
-    <a href="https://github.com/ivsg-psu/FeatureExtraction_Association_PointToPointAssociation/issues">Report Bug</a>
+    <a href="https://github.com/ivsg-psu/FieldDataCollection_GPSRelatedCodes_GPSClass/issues">Report Bug</a>
     ·
-    <a href="https://github.com/ivsg-psu/FeatureExtraction_Association_PointToPointAssociation/issues">Request Feature</a>
+    <a href="https://github.com/ivsg-psu/FieldDataCollection_GPSRelatedCodes_GPSClass/issues">Request Feature</a>
   </p>
 </p>
 

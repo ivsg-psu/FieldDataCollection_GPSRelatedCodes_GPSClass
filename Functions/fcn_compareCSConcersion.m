@@ -2,7 +2,7 @@ function pathResult = fcn_compareCSConcersion(convertMode,pathInput,referenceLLA
 % fcn_compareCSConcersion.m 
 % This function compares the coordinate system conversion algorithms:
 % Algorithm 1: From GPS class
-% Algorithm 2: From Satya's conversion code
+% Algorithm 2: From Standalone conversion code
 % Algorithm 3: From MATLAB built-in code
 
 % INPUTS:
@@ -118,14 +118,14 @@ print(gcf,strcat(convertMode,'-Difference between GPS class and MATLAB built-in'
 figure();
 histogram(pathResult.diffAg23);
 ylabel('Frequency');
-xlabel('Difference between Satya and MATLAB built-in');
+xlabel('Difference between Standalone and MATLAB built-in');
 fcn_setFigureFormat;
-print(gcf,strcat(convertMode,'-Difference between Satya and MATLAB built-in'),'-dpng');
+print(gcf,strcat(convertMode,'-Difference between Standalone and MATLAB built-in'),'-dpng');
 
 figure();
 histogram(pathResult.diffAg12);
 ylabel('Frequency');
-xlabel('Difference between GPS class and Satya');
+xlabel('Difference between GPS class and Standalone');
 fcn_setFigureFormat;
-print(gcf,strcat(convertMode,'-Difference between GPS class and Satya'),'-dpng');
+print(gcf,strcat(convertMode,'-Difference between GPS class and Standalone'),'-dpng');
 end

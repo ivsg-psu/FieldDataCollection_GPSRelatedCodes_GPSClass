@@ -194,31 +194,31 @@ The script script_test_fcn_compareCSConcersion.m is used to generate all the plo
 
 The following functions are used: 
 
-- gpsObj.WGSLLA2XYZ (GPS class)
-- fcn_GPS_lla2xyz (Satya)
+- gpsObj.WGSLLA2XYZ (GPS class, supports one point at a time)
+- fcn_GPS_lla2xyz (Standalone)
 - lla2ecef (MATLAB)
 
 The results are below:
 <ul>
 	<li>
     <img src=".\Images\lla2xyz-Difference between GPS class and MATLAB built-in.png" width="640" height="350">
-    <img src=".\Images\lla2xyz-Difference between Satya and MATLAB built-in.png" width="640" height="350">
-    <img src=".\Images\lla2xyz-Difference between GPS class and Satya.png" width="640" height="350">
+    <img src=".\Images\lla2xyz-Difference between Standalone and MATLAB built-in.png" width="640" height="350">
+    <img src=".\Images\lla2xyz-Difference between GPS class and Standalone.png" width="640" height="350">
 </ul>
 
 ### LLA to ENU
 The following functions are used: 
 
 - gpsObj.WGSLLA2ENU (GPS class)
-- fcn_GPS_lla2enu (Satya)
+- fcn_GPS_lla2enu (Standalone)
 - lla2enu (MATLAB)
 
 The results are below:
 <ul>
 	<li>
     <img src=".\Images\lla2enu-Difference between GPS class and MATLAB built-in.png" width="640" height="350">
-    <img src=".\Images\lla2enu-Difference between Satya and MATLAB built-in.png" width="640" height="350">
-    <img src=".\Images\lla2enu-Difference between GPS class and Satya.png" width="640" height="350">
+    <img src=".\Images\lla2enu-Difference between Standalone and MATLAB built-in.png" width="640" height="350">
+    <img src=".\Images\lla2enu-Difference between GPS class and Standalone.png" width="640" height="350">
 
 </ul>
 
@@ -226,60 +226,60 @@ The results are below:
 The following functions are used: 
 
 - gpsObj.ENU2WGSXYZ (GPS class)
-- fcn_GPS_enu2xyz (Satya)
-- enu2ecef (MATLAB)
+- fcn_GPS_enu2xyz (Standalone)
+- enu2ecef (MATLAB, supports one point at a time)
 
 The results are below:
 <ul>
 	<li>
     <img src=".\Images\enu2xyz-Difference between GPS class and MATLAB built-in.png" width="640" height="350">
-    <img src=".\Images\enu2xyz-Difference between Satya and MATLAB built-in.png" width="640" height="350">
-    <img src=".\Images\enu2xyz-Difference between GPS class and Satya.png" width="640" height="350">
+    <img src=".\Images\enu2xyz-Difference between Standalone and MATLAB built-in.png" width="640" height="350">
+    <img src=".\Images\enu2xyz-Difference between GPS class and Standalone.png" width="640" height="350">
 </ul>
 
 ### ENU to LLA
 The following functions are used: 
 
 - gpsObj.ENU2WGSLLA (GPS class)
-- fcn_GPS_enu2lla (Satya)
+- fcn_GPS_enu2lla (Standalone)
 - enu2lla (MATLAB)
 
 The results are below:
 <ul>
 	<li>
     <img src=".\Images\enu2lla-Difference between GPS class and MATLAB built-in.png" width="640" height="350">
-    <img src=".\Images\enu2lla-Difference between Satya and MATLAB built-in.png" width="640" height="350">
-    <img src=".\Images\enu2lla-Difference between GPS class and Satya.png" width="640" height="350">
+    <img src=".\Images\enu2lla-Difference between Standalone and MATLAB built-in.png" width="640" height="350">
+    <img src=".\Images\enu2lla-Difference between GPS class and Standalone.png" width="640" height="350">
 </ul>
 
 ### ECEF to ENU
 The following functions are used: 
 
 - gpsObj.WGSXYZ2ENU (GPS class)
-- fcn_GPS_xyz2enu (Satya)
-- ecef2enu (MATLAB)
+- fcn_GPS_xyz2enu (Standalone)
+- ecef2enu (MATLAB,supports one point at a time)
 
 The results are below:
 <ul>
 	<li>
     <img src=".\Images\xyz2enu-Difference between GPS class and MATLAB built-in.png" width="640" height="350">
-    <img src=".\Images\xyz2enu-Difference between Satya and MATLAB built-in.png" width="640" height="350">
-    <img src=".\Images\xyz2enu-Difference between GPS class and Satya.png" width="640" height="350">
+    <img src=".\Images\xyz2enu-Difference between Standalone and MATLAB built-in.png" width="640" height="350">
+    <img src=".\Images\xyz2enu-Difference between GPS class and Standalone.png" width="640" height="350">
 </ul>
 
 ### ECEF to LLA
 The following functions are used: 
 
-- gpsObj.WGSXYZ2LLA (GPS class)
-- fcn_GPS_xyz2lla (Satya)
+- gpsObj.WGSXYZ2LLA (GPS class,supports one point at a time)
+- fcn_GPS_xyz2lla (Standalone)
 - ecef2lla (MATLAB)
 
 The results are below:
 <ul>
 	<li>
     <img src=".\Images\xyz2lla-Difference between GPS class and MATLAB built-in.png" width="640" height="350">
-    <img src=".\Images\xyz2lla-Difference between Satya and MATLAB built-in.png" width="640" height="350">
-    <img src=".\Images\xyz2lla-Difference between GPS class and Satya.png" width="640" height="350">
+    <img src=".\Images\xyz2lla-Difference between Standalone and MATLAB built-in.png" width="640" height="350">
+    <img src=".\Images\xyz2lla-Difference between GPS class and Standalone.png" width="640" height="350">
 </ul>
 
 

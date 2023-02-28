@@ -90,6 +90,10 @@ As well, different tool sets use different coordinate systems. For example:
 
 Thus, there is a need for better data representations and coordinate systems. But each coordinate system encounters challenges, particularly because the representation of roadways typically assumes a "flat" surface. Thus, as the scale of a local area becomes large enough, the errors between a flat approximation versus a spherical approximation begin to grow and can become so pronounced that data begin to disagree depending on the origin used for the flat representation. When operating vehicles over a "large" area, for example tens to hundreds of kilometers, these errors can be so large that one cannot tell, on the "edge" of a mapped region, which lane or which road a vehicle is operating in - even though the so-called precision of the GPS measurement is reporting centimeter-level accuracy.
 
+In the ADS project, we need conversions among the coordinate systems as below: 
+
+<img src=".\Images\Coordinat_System_Conversion.png"  >
+
 This "GPSclass" code assists in performing large the coordinate systems for GPS data, including East-North-Up (ENU), Latitude-Longitude-Altitude (LLA) and Earth-Centered-Earth-Fixed (ECEF) systems. 
 
 NOTE: a companion repository, https://github.com/ivsg-psu/TrafficSimulators_WideAreaCoordinateSystems , reviews the above issues, showing calculations for different transformation sequences, and reveals that particular transformation sequences generate less error than others. 

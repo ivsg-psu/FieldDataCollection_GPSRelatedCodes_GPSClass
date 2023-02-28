@@ -111,21 +111,34 @@ figure();
 
 histogram(pathResult.diffAg13);
 ylabel('Frequency');
-xlabel('Difference between GPS class and MATLAB built-in');
+if strcmp(convertMode,'enu2lla') || strcmp(convertMode,'xyz2lla')
+xlabel('Difference between GPS class and MATLAB built-in[deg]');
+else
+xlabel('Difference between GPS class and MATLAB built-in[m]');   
+end
+
 fcn_setFigureFormat;
 print(gcf,strcat(convertMode,'-Difference between GPS class and MATLAB built-in'),'-dpng');
 
 figure();
 histogram(pathResult.diffAg23);
 ylabel('Frequency');
-xlabel('Difference between Standalone and MATLAB built-in');
+if strcmp(convertMode,'enu2lla') || strcmp(convertMode,'xyz2lla')
+xlabel('Difference between Standalone and MATLAB built-in[deg]');
+else
+    xlabel('Difference between Standalone and MATLAB built-in[m]');
+end
 fcn_setFigureFormat;
 print(gcf,strcat(convertMode,'-Difference between Standalone and MATLAB built-in'),'-dpng');
 
 figure();
 histogram(pathResult.diffAg12);
 ylabel('Frequency');
-xlabel('Difference between GPS class and Standalone');
+if strcmp(convertMode,'enu2lla') || strcmp(convertMode,'xyz2lla')
+xlabel('Difference between GPS class and Standalone[deg]');
+else
+xlabel('Difference between GPS class and Standalone[m]');    
+end
 fcn_setFigureFormat;
 print(gcf,strcat(convertMode,'-Difference between GPS class and Standalone'),'-dpng');
 end

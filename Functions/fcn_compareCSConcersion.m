@@ -30,6 +30,7 @@ function pathResult = fcn_compareCSConcersion(convertMode,pathInput,referenceLLA
 % 2023 02 09: first write of the code.
 
 gpsObj = GPSObject;
+coe_lla2meter = 111111;
 %% LLA TO XYZ 
 if strcmp(convertMode,'lla2xyz')
 resultAg1 = zeros(size(pathInput));
@@ -106,9 +107,8 @@ pathResult.diffAg23 = resultAg2 - resultAg3;
 pathResult.diffAg12 = resultAg1 - resultAg2;
 
 %% Generate figures
-
+%%%%%%%%%%%%%%%%% Difference between algorithm 1 and 3%%%%%%%%%%%%%%%%%%
 figure();
-
 histogram(pathResult.diffAg13);
 ylabel('Frequency');
 if strcmp(convertMode,'enu2lla') || strcmp(convertMode,'xyz2lla')
@@ -116,10 +116,10 @@ xlabel('Difference between GPS class and MATLAB built-in[deg]');
 else
 xlabel('Difference between GPS class and MATLAB built-in[m]');   
 end
-
 fcn_setFigureFormat;
 print(gcf,strcat(convertMode,'-Difference between GPS class and MATLAB built-in'),'-dpng');
 
+%%%%%%%%%%%%%%%%% Difference between algorithm 2 and 3%%%%%%%%%%%%%%%%%%
 figure();
 histogram(pathResult.diffAg23);
 ylabel('Frequency');
@@ -131,6 +131,7 @@ end
 fcn_setFigureFormat;
 print(gcf,strcat(convertMode,'-Difference between Standalone and MATLAB built-in'),'-dpng');
 
+%%%%%%%%%%%%%%%%% Difference between algorithm 1 and 2%%%%%%%%%%%%%%%%%%
 figure();
 histogram(pathResult.diffAg12);
 ylabel('Frequency');
@@ -141,4 +142,37 @@ xlabel('Difference between GPS class and Standalone[m]');
 end
 fcn_setFigureFormat;
 print(gcf,strcat(convertMode,'-Difference between GPS class and Standalone'),'-dpng');
+
+% Add three more plot: show the conversion error in equivalent meters, when the result is in LLA 
+if strcmp(convertMode,'enu2lla') || strcmp(convertMode,'xyz2lla')
+figure();
+histogram(pathResult.diffAg13 * coe_lla2meter);
+xlabel('Difference between GPS class and MATLAB built-in[m]');   
+ylabel('Frequency');
+fcn_setFigureFormat;
+print(gcf,strcat(convertMode,'-Difference between GPS class and MATLAB built-in-In meters equivalent'),'-dpng');
+
+figure();
+histogram(pathResult.diffAg23 * coe_lla2meter);
+xlabel('Difference between Standalone and MATLAB built-in[m]');
+ylabel('Frequency');
+fcn_setFigureFormat;
+print(gcf,strcat(convertMode,'-Difference between Standalone and MATLAB built-in-In meters equivalent'),'-dpng');
+
+figure();
+histogram(pathResult.diffAg12 * coe_lla2meter);
+xlabel('Difference between GPS class and Standalone[m]');   
+ylabel('Frequency');
+fcn_setFigureFormat;
+print(gcf,strcat(convertMode,'-Difference between GPS class and Standalone-In meters equivalent'),'-dpng');
+
+
+end
+
+
+
+
+
+
+
 end

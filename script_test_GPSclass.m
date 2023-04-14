@@ -6,6 +6,18 @@
 %     2021_12_12
 %     -- first write of the code
 
+% Clear any old paths
+path_dirs = regexp(path,'[;]','split');
+clear_dir = pwd;
+for ith_dir = 1:length(path_dirs)
+    utility_flag = strfind(path_dirs{ith_dir},clear_dir);
+    if ~isempty(utility_flag)
+        rmpath(path_dirs{ith_dir});
+    end
+end
+
+% Update the path
+path(path,genpath(fullfile(pwd,filesep,'Functions')));
 
 close all;
 
@@ -57,13 +69,22 @@ gps_object = GPS(); % Initiate the class object for GPS
 
 % Use the class to convert LLA to ENU
 ENU_data = gps_object.WGSLLA2ENU(LLA_data(:,1), LLA_data(:,2), LLA_data(:,3));
-ENU_data = ENU_data';
 
-%% Plot the result
+%% Plot the ENU results
 figure(22222);
 clf;
-
 plot(ENU_data(:,1),ENU_data(:,2),'-','Linewidth',3);
+
+%% Convert back to LLA
+LLA_data_convertedBack  =  gps_object.ENU2WGSLLA(ENU_data);
+
+%% Make sure we get what we started with
+max_errors = max(LLA_data-LLA_data_convertedBack);
+
+assert(max_errors(1)<1E-12);  % Latitude errror (in degrees)
+assert(max_errors(2)<1E-12);  % Longitude errror (in degrees)
+assert(max_errors(3)<1E-6);   % Height errror (in meters)
+
 
 
 

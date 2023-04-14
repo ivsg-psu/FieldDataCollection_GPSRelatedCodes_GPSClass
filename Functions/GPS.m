@@ -1,4 +1,9 @@
 classdef GPS < handle
+    % CHANGELOG
+    % 2023_04_14 - sbrennan@psu.edu
+    % - added check for GPS conversions    
+    % - disambiguated length for vectors to ensure row operations
+
        
     % Class properties and variables
     properties
@@ -50,13 +55,11 @@ classdef GPS < handle
             end
             
             %ENU = zeros(3,length(latitude));
-            ENU = zeros(length(latitude),3);
-            for i = 1:length(latitude)
+            ENU = zeros(length(latitude(:,1)),3); % Disambiguation - added 2023_04_14
+            for ith_row = 1:length(latitude(:,1))  % Disambiguation - added 2023_04_14
             
-                XYZ = WGSLLA2XYZ(obj, latitude(i), longitude(i), altitude(i))';
-
-                %ENU(:,i) = WGSXYZ2ENU(obj, XYZ, reference_latitude, reference_longitude, reference_altitude);
-                ENU(i,:) = WGSXYZ2ENU(obj, XYZ, reference_latitude, reference_longitude, reference_altitude);
+                XYZ = WGSLLA2XYZ(obj, latitude(ith_row), longitude(ith_row), altitude(ith_row))';
+                ENU(ith_row,:) = WGSXYZ2ENU(obj, XYZ, reference_latitude, reference_longitude, reference_altitude);
             end
             
         end
@@ -93,11 +96,9 @@ classdef GPS < handle
             end
            
             % First, calculate the xyz of reflat, reflon, refalt
-
-            %refXYZ = WGSLLA2XYZ(obj, reference_latitude, reference_longitude, reference_altitude);
             refXYZ = WGSLLA2XYZ(obj, reference_latitude, reference_longitude, reference_altitude)';
-            % Difference xyz from reference point
 
+            % Difference xyz from reference point
             diffXYZ = XYZ - refXYZ;
 
             % Now rotate the (often short) diffxyz vector to enu frame
@@ -122,7 +123,7 @@ classdef GPS < handle
             
             R = R2 * R1;
 
-            %ENU = R * diffXYZ;
+            % Apply the rotation
             ENU = R * diffXYZ';
         end
         
@@ -243,10 +244,8 @@ classdef GPS < handle
                 
             end
             
-%             LLA = zeros(3,size(ENU,2));
-            LLA = zeros(size(ENU));
-            %for i = 1:size(ENU,2)   
-            for i = 1:size(ENU,1)  
+            LLA = zeros(length(ENU(:,1)),3);   % Disambiguation - added 2023_04_14
+            for i = 1:length(ENU(:,1))         % Disambiguation - added 2023_04_14
                 
                 %XYZ = ENU2WGSXYZ(obj, ENU(:,i), reference_latitude, reference_longitude, reference_altitude);
                 XYZ = ENU2WGSXYZ(obj, ENU(i,:), reference_latitude, reference_longitude, reference_altitude);

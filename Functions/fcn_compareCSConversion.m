@@ -1,5 +1,5 @@
-function pathResult = fcn_compareCSConcersion(convertMode,pathInput,referenceLLA,GPSObject)
-% fcn_compareCSConcersion.m 
+function pathResult = fcn_compareCSConversion(convertMode,pathInput,referenceLLA,GPSObject)
+% fcn_compareCSConversion.m 
 % This function compares the coordinate system conversion algorithms:
 % Algorithm 1: From GPS class
 % Algorithm 2: From Standalone conversion code

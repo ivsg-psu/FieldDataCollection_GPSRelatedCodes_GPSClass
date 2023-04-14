@@ -4,9 +4,16 @@ classdef GPS < handle
     properties
         
         % General parameters
-        reference_latitude = 40.8623031194444;
-        reference_longitude = -77.8362636138889;
-        reference_altitude = 333.817;
+        % Test track base station - calibration from 03/17/2023        
+        reference_latitude = 40.86368573;
+        reference_longitude = -77.83592832;
+        reference_altitude = 344.189;
+
+        % OLD test track base station - near fueling station. Now
+        % deprecated.
+        % reference_latitude = 40.8623031194444;
+        % reference_longitude = -77.8362636138889;
+        % reference_altitude = 333.817;
         
     end
         

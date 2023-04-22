@@ -234,15 +234,28 @@ classdef GPS < handle
             
         end
 
-        function LLA = ENU2WGSLLA(obj, ENU, reference_latitude, reference_longitude, reference_altitude)
-            
+        function LLA = ENU2WGSLLA(obj, ENU, varargin)
+
             if nargin == 2
-               
+
                 reference_latitude = obj.reference_latitude;
                 reference_longitude = obj.reference_longitude;
                 reference_altitude = obj.reference_altitude;
-                
+            else
+                reference_latitude = varargin{1};
+                reference_longitude = varargin{2};
+                reference_altitude = varargin{3};
             end
+            %
+            %         function LLA = ENU2WGSLLA(obj, ENU, reference_latitude, reference_longitude, reference_altitude)
+            %
+            %             if nargin == 2
+            %
+            %                 reference_latitude = obj.reference_latitude;
+            %                 reference_longitude = obj.reference_longitude;
+            %                 reference_altitude = obj.reference_altitude;
+            %
+            %             end
             
             LLA = zeros(length(ENU(:,1)),3);   % Disambiguation - added 2023_04_14
             for i = 1:length(ENU(:,1))         % Disambiguation - added 2023_04_14

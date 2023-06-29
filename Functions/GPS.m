@@ -3,6 +3,9 @@ classdef GPS < handle
     % 2023_04_14 - sbrennan@psu.edu
     % - added check for GPS conversions    
     % - disambiguated length for vectors to ensure row operations
+    % 2023_06_28 - sbrennan@psu.edu
+    % - added check for and disambiguation for 3 x N inputs to
+    % automatically convert to N x 3 inputs
 
        
     % Class properties and variables
@@ -54,6 +57,15 @@ classdef GPS < handle
                 
             end
             
+            % Disambiguation - added 2023_06_28
+            % Check if matrix is in the correct orientation
+            if length(latitude(:,1))==1 && length(latitude(1,:))>1
+                latitude = latitude';
+                longitude = longitude';
+                altitude = altitude';
+            end
+            
+            
             %ENU = zeros(3,length(latitude));
             ENU = zeros(length(latitude(:,1)),3); % Disambiguation - added 2023_04_14
             for ith_row = 1:length(latitude(:,1))  % Disambiguation - added 2023_04_14
@@ -61,6 +73,7 @@ classdef GPS < handle
                 XYZ = WGSLLA2XYZ(obj, latitude(ith_row), longitude(ith_row), altitude(ith_row))';
                 ENU(ith_row,:) = WGSXYZ2ENU(obj, XYZ, reference_latitude, reference_longitude, reference_altitude);
             end
+            
             
         end
         
@@ -238,14 +251,21 @@ classdef GPS < handle
 
             if nargin == 2
 
-                reference_latitude = obj.reference_latitude;
-                reference_longitude = obj.reference_longitude;
-                reference_altitude = obj.reference_altitude;
+                ref_latitude = obj.reference_latitude;
+                ref_longitude = obj.reference_longitude;
+                ref_altitude = obj.reference_altitude;
             else
-                reference_latitude = varargin{1};
-                reference_longitude = varargin{2};
-                reference_altitude = varargin{3};
+                ref_latitude = varargin{1};
+                ref_longitude = varargin{2};
+                ref_altitude = varargin{3};
             end
+            
+            % Disambiguation - added 2023_06_28
+            % Check if matrix is in the correct orientation
+            if length(ENU(:,1))==3 && length(ENU(1,:))>1
+                ENU = ENU';
+            end
+            
             %
             %         function LLA = ENU2WGSLLA(obj, ENU, reference_latitude, reference_longitude, reference_altitude)
             %
@@ -261,7 +281,7 @@ classdef GPS < handle
             for i = 1:length(ENU(:,1))         % Disambiguation - added 2023_04_14
                 
                 %XYZ = ENU2WGSXYZ(obj, ENU(:,i), reference_latitude, reference_longitude, reference_altitude);
-                XYZ = ENU2WGSXYZ(obj, ENU(i,:), reference_latitude, reference_longitude, reference_altitude);
+                XYZ = ENU2WGSXYZ(obj, ENU(i,:), ref_latitude, ref_longitude, ref_altitude);
                 %LLA(:,i) = WGSXYZ2LLA(obj, XYZ);
                 LLA(i,:) = WGSXYZ2LLA(obj, XYZ);
                 
